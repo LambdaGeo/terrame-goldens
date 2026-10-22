@@ -67,3 +67,25 @@ function recordCounts(model, cs, attr, f, seed, extra)
 	model.timer:add(Event{priority = 100, action = function(ev) write(ev:getTime()) end})
 	model:run()
 end
+
+-- Model variables (system dynamics): one row per step with the value of each
+-- variable, numbers written with 17 significant digits (exact for doubles).
+local function fmt(v)
+	if v == nil then return "" end
+	if math.type(v) == "float" then return string.format("%.17g", v) end
+	return tostring(v)
+end
+
+function recordVars(model, vars, path)
+	local f = assert(io.open(path, "w"))
+	f:write("step,", table.concat(vars, ","), "\n")
+	local function write(step)
+		local row = {step}
+		for _, v in ipairs(vars) do row[#row + 1] = fmt(model[v]) end
+		f:write(table.concat(row, ","), "\n")
+	end
+	write(0)
+	model.timer:add(Event{priority = 100, action = function(ev) write(ev:getTime()) end})
+	model:run()
+	f:close()
+end

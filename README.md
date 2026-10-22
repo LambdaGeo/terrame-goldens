@@ -12,7 +12,7 @@ LuccME, and it was made to verify the DisSModel extensions:
 | TerraME package | DisSModel extension | Suite here |
 | --- | --- | --- |
 | [`ca`](https://github.com/TerraME/ca) | [`dissmodel-ca`](https://github.com/DisSModel/dissmodel-ca) | `goldens/ca/` (this version) |
-| [`sysdyn`](https://github.com/TerraME/sysdyn) | [`dissmodel-sysdyn`](https://github.com/DisSModel/dissmodel-sysdyn) | planned |
+| [`sysdyn`](https://github.com/TerraME/sysdyn) | [`dissmodel-sysdyn`](https://github.com/DisSModel/dissmodel-sysdyn) | `goldens/sysdyn/` (this version) |
 | [`logo`](https://github.com/TerraME/logo) | [`dissmodel-abm`](https://github.com/DisSModel/dissmodel-abm) | planned |
 
 ## What can be compared, and how
@@ -55,6 +55,36 @@ Default parameters and `finalTime` of each model.
 Not included: `BandedVegetation`, `DaisyWorld` (the cellular version),
 `Influenza` and `LifePatterns`, which have no DisSModel port yet.
 
+### Suite `sysdyn` (package `sysdyn` 0.8.3, commit `9e671cb`; `sci` commit `42b0b3e`)
+
+The value of each state variable before the first step and after every
+step, written with 17 significant digits (enough to recover every double
+exactly), for the default parameters and a few of the choices the models
+offer. All of them are deterministic, except RandomWalk, recorded for seeds
+1 to 50 in one file (`seed, step, value`).
+
+| Golden | Model | Steps | Variables |
+| --- | --- | --- | --- |
+| `chaotic_growth` | ChaoticGrowth | 300 | `pop` |
+| `coffee` | Coffee | 20 | `temperature` |
+| `daisyworld` | Daisyworld | 100 | `whiteArea`, `blackArea`, `emptyArea`, `aveTemp`, `tempNearWhite`, `tempNearBlack` |
+| `homeostasis`, `homeostasis_100` | Homeostasis, `stock = 0, 100` | 30 | `stock` |
+| `limited_growth` | LimitedGrowth | 100 | `pop` |
+| `lorenz` | Lorenz | 10000 | `x`, `y`, `z` |
+| `mono_lake`, `mono_lake_export_50` | MonoLake, `export = 100, 50` | 50 | `waterInLake`, `level` |
+| `population_growth` | PopulationGrowth | 7 | `population`, `growth` |
+| `predator_prey` | PredatorPrey | 500 | `prey`, `predator` |
+| `room_temperature` | RoomTemperature | 24 | `inside`, `outside` |
+| `sir` | SIR | 30 | `susceptible`, `infected`, `recovered`, `contacts` |
+| `tub` | Tub | 8 | `water` |
+| `yeast`, `yeast_rate_2` | Yeast, `rate = 1.1, 2` | 9 | `cells` |
+| `random_walk` | RandomWalk (50 seeds) | 100 | `value` |
+
+A variable that does not exist yet at step 0 (`tempNearWhite` and
+`tempNearBlack` of Daisyworld) is left empty in that row. In Tub, the inflow
+event starts at `t = 10`, after `finalTime = 8`, so it never runs: the golden
+records the model as it is.
+
 ### File formats
 
 A grid golden (`<case>.csv.gz`) is a stack of grids: one row per step and
@@ -70,7 +100,10 @@ ensemble also has two spatial counts as extra values: `atom1_right`, the
 `atom1` cells to the right of the middle column, and `atom2_left`, the
 `atom2` cells to its left, which measure how far the atoms have mixed.
 
-`scripts/goldens.py` reads both with NumPy:
+A sysdyn golden (`<case>.csv.gz`) has a column `step` and one column per
+variable.
+
+`scripts/goldens.py` reads the grids and ensembles with NumPy:
 
 ```python
 from goldens import load_grid, load_ensemble
@@ -117,11 +150,15 @@ Version v0.1.0 was generated with the official TerraME 2.0.1 binary (the
 same file, checked by SHA-256, that the `terrame-docker` image installs) run
 directly on Ubuntu 24.04 under Xvfb, with `libtiff.so.6` standing in for the
 `libtiff.so.5` of Ubuntu 18.04; not inside the image. Before generating, the
-package's own test suite (`terrame -package ca -test`) was run in that
-setup: 964 of 965 asserts passed, including every map snapshot of the
-models above; the one failure is a chart image of `Influenza` (2.9 % of the
-pixels differ, tolerance 0), a model that is not in these goldens. The run
-is deterministic: running a driver twice gives byte-identical files.
+packages' own test suites were run in that setup. `ca`: 964 of 965 asserts
+passed, including every map snapshot of the models above; the one failure is
+a chart image of `Influenza` (2.9 % of the pixels differ, tolerance 0), a
+model that is not in these goldens. `sysdyn`: 35 of 36 asserts passed; the
+failure is the final value of `RandomWalk` with the test framework's seed (a
+test last updated in 2017), and the `Tub` test stops because the test mode
+treats `start = 10`, the default value, as an error (in a normal run it is a
+warning). The runs are deterministic: running a driver twice gives
+byte-identical files.
 
 `make run-docker` followed by `make build` and `make check` regenerates
 everything in the image; the hashes should match those of `checksums.sha256`.

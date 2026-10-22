@@ -4,6 +4,7 @@ Turn the raw output of the drivers (build/) into the published goldens.
 - grids: build/ca/grids/<case>.csv  -> goldens/ca/grids/<case>.csv.gz
 - ensembles: build/ca/ensembles/<case>.<seed>-<seed>.csv parts are joined,
   sorted by seed, into goldens/ca/ensembles/<case>.csv.gz
+- sysdyn: build/sysdyn/<case>.csv -> goldens/sysdyn/<case>.csv.gz
 - manifest.json (files, SHA-256, sizes, cases, package commits, generator)
 - checksums.sha256 (for ``sha256sum -c``)
 
@@ -86,6 +87,15 @@ def build_ensembles(src: Path, dst: Path, seeds: int) -> list[dict]:
     return summary
 
 
+def build_sysdyn(src: Path, dst: Path) -> list[dict]:
+    cases = list(csv.DictReader(open(src / "cases.csv", newline="")))
+    for c in cases:
+        write_gz((src / f"{c['case']}.csv").read_bytes(), dst / f"{c['case']}.csv.gz")
+    dst.mkdir(parents=True, exist_ok=True)
+    (dst / "cases.csv").write_bytes((src / "cases.csv").read_bytes())
+    return cases
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--build", default=str(ROOT / "build"))
@@ -99,6 +109,7 @@ def main() -> None:
     out = ROOT / "goldens"
     grids = build_grids(build / "ca" / "grids", out / "ca" / "grids")
     ensembles = build_ensembles(build / "ca" / "ensembles", out / "ca" / "ensembles", args.seeds)
+    sysdyn = build_sysdyn(build / "sysdyn", out / "sysdyn")
 
     files = []
     for p in sorted(out.rglob("*")):
@@ -115,6 +126,7 @@ def main() -> None:
         "packages": lock(),
         "drivers": drivers,
         "ca": {"grids": grids, "ensembles": ensembles},
+        "sysdyn": sysdyn,
         "files": files,
     }
     (ROOT / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")

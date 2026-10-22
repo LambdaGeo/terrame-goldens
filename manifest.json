@@ -8,12 +8,23 @@
       "name": "ca",
       "repository": "https://github.com/TerraME/ca",
       "commit": "854a5c405478d712013a0baffd382f438f367642"
+    },
+    {
+      "name": "sysdyn",
+      "repository": "https://github.com/TerraME/sysdyn",
+      "commit": "9e671cb86ee33143bd910f1243bc71f2d1c5e5a9"
+    },
+    {
+      "name": "sci",
+      "repository": "https://github.com/TerraME/sci",
+      "commit": "42b0b3e319b6b6fe7bc2d3566e23876db12a2bac"
     }
   ],
   "drivers": {
     "lua/ca_ensembles.lua": "80f2cfac4fa51edb36d700cb92b6c4481a4a5f6e9fb9387cabc7598c7eb3f2a3",
     "lua/ca_grids.lua": "a47a8a42a9060fc7fe42202c4513b8890b7a74380c14da5f1ea0f256b1dffdd2",
-    "lua/common.lua": "577a4f71b384fd21ef1af7f667885354de735e3402eb938ba264e73581168c74"
+    "lua/common.lua": "441c5bca2027d7d36e3fb6c14dcc1fb737592f875adbfde6693de8dcca6c1ca0",
+    "lua/sysdyn.lua": "33b296c2b87739d1b6ab2db6b9489fbc6dfb62d4e2668ed747b86bf98093fa4c"
   },
   "ca": {
     "grids": [
@@ -166,6 +177,144 @@
       }
     ]
   },
+  "sysdyn": [
+    {
+      "case": "chaotic_growth",
+      "model": "ChaoticGrowth",
+      "arguments": "",
+      "seeds": "",
+      "final_time": "300",
+      "variables": "pop"
+    },
+    {
+      "case": "coffee",
+      "model": "Coffee",
+      "arguments": "",
+      "seeds": "",
+      "final_time": "20",
+      "variables": "temperature"
+    },
+    {
+      "case": "daisyworld",
+      "model": "Daisyworld",
+      "arguments": "",
+      "seeds": "",
+      "final_time": "100",
+      "variables": "whiteArea;blackArea;emptyArea;aveTemp;tempNearWhite;tempNearBlack"
+    },
+    {
+      "case": "homeostasis",
+      "model": "Homeostasis",
+      "arguments": "",
+      "seeds": "",
+      "final_time": "30",
+      "variables": "stock"
+    },
+    {
+      "case": "homeostasis_100",
+      "model": "Homeostasis",
+      "arguments": "stock=100.0",
+      "seeds": "",
+      "final_time": "30",
+      "variables": "stock"
+    },
+    {
+      "case": "limited_growth",
+      "model": "LimitedGrowth",
+      "arguments": "",
+      "seeds": "",
+      "final_time": "100",
+      "variables": "pop"
+    },
+    {
+      "case": "lorenz",
+      "model": "Lorenz",
+      "arguments": "",
+      "seeds": "",
+      "final_time": "10000",
+      "variables": "x;y;z"
+    },
+    {
+      "case": "mono_lake",
+      "model": "MonoLake",
+      "arguments": "",
+      "seeds": "",
+      "final_time": "50",
+      "variables": "waterInLake;level"
+    },
+    {
+      "case": "mono_lake_export_50",
+      "model": "MonoLake",
+      "arguments": "export=50",
+      "seeds": "",
+      "final_time": "50",
+      "variables": "waterInLake;level"
+    },
+    {
+      "case": "population_growth",
+      "model": "PopulationGrowth",
+      "arguments": "",
+      "seeds": "",
+      "final_time": "7",
+      "variables": "population;growth"
+    },
+    {
+      "case": "predator_prey",
+      "model": "PredatorPrey",
+      "arguments": "",
+      "seeds": "",
+      "final_time": "500",
+      "variables": "prey;predator"
+    },
+    {
+      "case": "room_temperature",
+      "model": "RoomTemperature",
+      "arguments": "",
+      "seeds": "",
+      "final_time": "24",
+      "variables": "inside;outside"
+    },
+    {
+      "case": "sir",
+      "model": "SIR",
+      "arguments": "",
+      "seeds": "",
+      "final_time": "30",
+      "variables": "susceptible;infected;recovered;contacts"
+    },
+    {
+      "case": "tub",
+      "model": "Tub",
+      "arguments": "",
+      "seeds": "",
+      "final_time": "8",
+      "variables": "water"
+    },
+    {
+      "case": "yeast",
+      "model": "Yeast",
+      "arguments": "",
+      "seeds": "",
+      "final_time": "9",
+      "variables": "cells"
+    },
+    {
+      "case": "yeast_rate_2",
+      "model": "Yeast",
+      "arguments": "rate=2.0",
+      "seeds": "",
+      "final_time": "9",
+      "variables": "cells"
+    },
+    {
+      "case": "random_walk",
+      "model": "RandomWalk",
+      "arguments": "",
+      "seeds": "50",
+      "final_time": "100",
+      "variables": "value"
+    }
+  ],
   "files": [
     {
       "path": "goldens/ca/ensembles/fire.csv.gz",
@@ -256,6 +405,96 @@
       "path": "goldens/ca/grids/wolfram_90.csv.gz",
       "sha256": "9b15c41617f909d3355ac46e194aa314dfb8a10ea1a34eb8e8b89d9766f97303",
       "size_bytes": 18170
+    },
+    {
+      "path": "goldens/sysdyn/cases.csv",
+      "sha256": "361152d2c2d90f72487f782d6fcff18746bf22814a582d42528a67bbd79780cc",
+      "size_bytes": 791
+    },
+    {
+      "path": "goldens/sysdyn/chaotic_growth.csv.gz",
+      "sha256": "6328b3248918b88ec4adfc1002a99ec6c4d252fa1e6a3beaa0c1477faa528c75",
+      "size_bytes": 3608
+    },
+    {
+      "path": "goldens/sysdyn/coffee.csv.gz",
+      "sha256": "cf32769b784339a21489a54ef05f1e59c403da6857fa7421dd28e05f1581a4c1",
+      "size_bytes": 242
+    },
+    {
+      "path": "goldens/sysdyn/daisyworld.csv.gz",
+      "sha256": "da394371bf4dc84114ae5c5815797d20aaa7fd85b6e7b182446e180f7d747c6c",
+      "size_bytes": 5299
+    },
+    {
+      "path": "goldens/sysdyn/homeostasis.csv.gz",
+      "sha256": "2cb49a621d7153e98632f7f0e11bfdc47ea04a105a2f659d6976bfa3dfc0fd4f",
+      "size_bytes": 301
+    },
+    {
+      "path": "goldens/sysdyn/homeostasis_100.csv.gz",
+      "sha256": "6896a8faed843dc0c42f58194b284381fad971e793bed8de531ef26282ac280b",
+      "size_bytes": 315
+    },
+    {
+      "path": "goldens/sysdyn/limited_growth.csv.gz",
+      "sha256": "9972047016a135b12c2e70e26209d438e1b911dd44ac927c47f4b8eab5f28b87",
+      "size_bytes": 1183
+    },
+    {
+      "path": "goldens/sysdyn/lorenz.csv.gz",
+      "sha256": "96c83fea2d715e3f649be194c7c5a2f436b2e11d9784bf38d86cb09e915038f6",
+      "size_bytes": 300295
+    },
+    {
+      "path": "goldens/sysdyn/mono_lake.csv.gz",
+      "sha256": "0b085b0286bb7af814f51c549c0fed539e142b2b40b19a37e74d166ca8f7db80",
+      "size_bytes": 1101
+    },
+    {
+      "path": "goldens/sysdyn/mono_lake_export_50.csv.gz",
+      "sha256": "fdc1b31b6181fc4a5d4ea6b82525d521f1ab0347e1162853d31423c7a62f6524",
+      "size_bytes": 1041
+    },
+    {
+      "path": "goldens/sysdyn/population_growth.csv.gz",
+      "sha256": "ac1e0a04495db4ab8239be3df64261420fdb6714e1f824bda7c4c4a094d87736",
+      "size_bytes": 101
+    },
+    {
+      "path": "goldens/sysdyn/predator_prey.csv.gz",
+      "sha256": "51feea1fb7383c1eea15ee7cf8579003fe526b308644faf4423338aa6380434b",
+      "size_bytes": 10997
+    },
+    {
+      "path": "goldens/sysdyn/random_walk.csv.gz",
+      "sha256": "851545dee78e65f5f7a7d1b22fe2fbd4fffede22ceef795ce7a1536a891c7a6b",
+      "size_bytes": 14311
+    },
+    {
+      "path": "goldens/sysdyn/room_temperature.csv.gz",
+      "sha256": "353331f5f08929a2c9cb707bb83644b5ae1a114dbbffb75cfeb654bcc09c3276",
+      "size_bytes": 361
+    },
+    {
+      "path": "goldens/sysdyn/sir.csv.gz",
+      "sha256": "c3381b461ba01945be76f257bfadbd4416ae532704663580cabd992d39c331ae",
+      "size_bytes": 1008
+    },
+    {
+      "path": "goldens/sysdyn/tub.csv.gz",
+      "sha256": "2a47c516a64fca621f1c86d9ac45c9c3c4b34a24aa9fdd2098288a022810bee8",
+      "size_bytes": 69
+    },
+    {
+      "path": "goldens/sysdyn/yeast.csv.gz",
+      "sha256": "5db25a6ed8cf4ee8d5ff0bd171543d1e32c11f2bf26f4ae596ee91bd9dc41eba",
+      "size_bytes": 138
+    },
+    {
+      "path": "goldens/sysdyn/yeast_rate_2.csv.gz",
+      "sha256": "7052dec647e5ff9d0f84d9e70d9549fe70349e1a04f11c07697f4e58a41e9b27",
+      "size_bytes": 110
     }
   ]
 }

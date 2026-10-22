@@ -4,7 +4,7 @@ type: dataset
 title: "terrame-goldens: Reference Execution Outputs of the TerraME ca, sysdyn and logo Packages"
 abstract: >-
   Reference execution outputs (goldens) of the models of the TerraME 2.0.1 packages
-  (cellular automata of the ca package; sysdyn and logo to follow), with fixed package commits,
+  (cellular automata of the ca package and system dynamics of the sysdyn package; logo to follow), with fixed package commits,
   seeds and SHA-256 hashes, and the harness that regenerates them in the terrame-docker image.
   They are used to verify the DisSModel extensions dissmodel-ca, dissmodel-sysdyn and
   dissmodel-abm against TerraME itself.
@@ -16,12 +16,16 @@ references:
   - type: software
     title: "ca: Cellular Automata package for TerraME"
     repository-code: "https://github.com/TerraME/ca"
+  - type: software
+    title: "sysdyn: System Dynamics package for TerraME"
+    repository-code: "https://github.com/TerraME/sysdyn"
 license: MIT
 url: "https://github.com/LambdaGeo/terrame-goldens"
 repository-code: "https://github.com/LambdaGeo/terrame-goldens"
 keywords:
   - TerraME
   - cellular automata
+  - system dynamics
   - golden data
   - verification
   - reproducibility
