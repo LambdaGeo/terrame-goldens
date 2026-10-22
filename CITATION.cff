@@ -12,12 +12,23 @@ version: 0.1.0
 references:
   - type: software
     title: "terrame-docker: TerraME and LuccME in a Docker image"
+    authors:
+      - family-names: Costa
+        given-names: Sérgio Souza
     repository-code: "https://github.com/profsergiocosta/terrame-docker"
   - type: software
     title: "ca: Cellular Automata package for TerraME"
+    authors:
+      - family-names: Andrade
+        given-names: Pedro R.
     repository-code: "https://github.com/TerraME/ca"
   - type: software
     title: "sysdyn: System Dynamics package for TerraME"
+    authors:
+      - family-names: Camara
+        given-names: Gilberto
+      - family-names: Andrade
+        given-names: Pedro R.
     repository-code: "https://github.com/TerraME/sysdyn"
 license: MIT
 url: "https://github.com/LambdaGeo/terrame-goldens"
