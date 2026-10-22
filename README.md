@@ -13,7 +13,7 @@ LuccME, and it was made to verify the DisSModel extensions:
 | --- | --- | --- |
 | [`ca`](https://github.com/TerraME/ca) | [`dissmodel-ca`](https://github.com/DisSModel/dissmodel-ca) | `goldens/ca/` (this version) |
 | [`sysdyn`](https://github.com/TerraME/sysdyn) | [`dissmodel-sysdyn`](https://github.com/DisSModel/dissmodel-sysdyn) | `goldens/sysdyn/` (this version) |
-| [`logo`](https://github.com/TerraME/logo) | [`dissmodel-abm`](https://github.com/DisSModel/dissmodel-abm) | planned |
+| [`logo`](https://github.com/TerraME/logo) | [`dissmodel-abm`](https://github.com/DisSModel/dissmodel-abm) | `goldens/logo/` (this version) |
 
 ## What can be compared, and how
 
@@ -84,6 +84,25 @@ A variable that does not exist yet at step 0 (`tempNearWhite` and
 `tempNearBlack` of Daisyworld) is left empty in that row. In Tub, the inflow
 event starts at `t = 10`, after `finalTime = 8`, so it never runs: the golden
 records the model as it is.
+
+### Suite `logo` (package `logo` 0.5.6, commit `bb57a26`)
+
+Agent-based models draw random numbers at every step, so every logo golden
+is an ensemble: for seeds 1 to 50, the values the model reports after every
+step, with default parameters. Format: `seed, step, variable, value`.
+
+| Golden | Model | Steps | Variables |
+| --- | --- | --- | --- |
+| `schelling` | Schelling | 500 | `unhappy` (what the model's chart shows: % of unhappy agents counted when the step starts, before the move), `unhappy_after` (% after the move) |
+| `predator_prey` | PredatorPrey | 500 | `rabbits`, `wolves`, `pasture` (cells with pasture) |
+| `life_cycle` | LifeCycle | 100 | `agents` |
+| `ants` | Ants | 450 | `food` (the model's food counter), `bringing` (ants carrying food) |
+| `disease` | Disease | 30 | `susceptible`, `infected`, `recovered` |
+
+`SingleAgent` is not included (a single random walker has nothing to
+compare beyond the walk itself), nor the models without a DisSModel port
+(`GrowingSociety`, `Heatbugs`, `Labyrinth`, `Overpopulation`, `SpatialPD`,
+`Sugarscape`).
 
 ### File formats
 
@@ -157,7 +176,14 @@ model that is not in these goldens. `sysdyn`: 35 of 36 asserts passed; the
 failure is the final value of `RandomWalk` with the test framework's seed (a
 test last updated in 2017), and the `Tub` test stops because the test mode
 treats `start = 10`, the default value, as an error (in a normal run it is a
-warning). The runs are deterministic: running a driver twice gives
+warning). `logo`: the suite does not start as published, because
+`lua/SpatialPD.lua` is missing from `load.lua`; with that file listed (in a
+scratch copy only; the goldens use the package unchanged), the map and chart
+snapshots of Ants, Disease, PredatorPrey and SingleAgent all pass, random
+placement included. The snapshots that fail are those of Schelling and
+LifeCycle, made in March and May 2017 before their code changed (June and
+August 2017), and those of Overpopulation and Sugarscape, which are not in
+these goldens. The runs are deterministic: running a driver twice gives
 byte-identical files.
 
 `make run-docker` followed by `make build` and `make check` regenerates

@@ -4,7 +4,7 @@ type: dataset
 title: "terrame-goldens: Reference Execution Outputs of the TerraME ca, sysdyn and logo Packages"
 abstract: >-
   Reference execution outputs (goldens) of the models of the TerraME 2.0.1 packages
-  (cellular automata of the ca package and system dynamics of the sysdyn package; logo to follow), with fixed package commits,
+  (cellular automata of the ca package, system dynamics of the sysdyn package and agent-based models of the logo package), with fixed package commits,
   seeds and SHA-256 hashes, and the harness that regenerates them in the terrame-docker image.
   They are used to verify the DisSModel extensions dissmodel-ca, dissmodel-sysdyn and
   dissmodel-abm against TerraME itself.
@@ -30,6 +30,12 @@ references:
       - family-names: Andrade
         given-names: Pedro R.
     repository-code: "https://github.com/TerraME/sysdyn"
+  - type: software
+    title: "logo: Simple spatial ABM package for TerraME"
+    authors:
+      - family-names: Andrade
+        given-names: Pedro R.
+    repository-code: "https://github.com/TerraME/logo"
 license: MIT
 url: "https://github.com/LambdaGeo/terrame-goldens"
 repository-code: "https://github.com/LambdaGeo/terrame-goldens"
@@ -37,6 +43,7 @@ keywords:
   - TerraME
   - cellular automata
   - system dynamics
+  - agent-based modelling
   - golden data
   - verification
   - reproducibility

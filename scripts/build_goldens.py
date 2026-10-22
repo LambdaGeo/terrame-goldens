@@ -5,6 +5,8 @@ Turn the raw output of the drivers (build/) into the published goldens.
 - ensembles: build/ca/ensembles/<case>.<seed>-<seed>.csv parts are joined,
   sorted by seed, into goldens/ca/ensembles/<case>.csv.gz
 - sysdyn: build/sysdyn/<case>.csv -> goldens/sysdyn/<case>.csv.gz
+- logo: build/logo/<case>.<seed>-<seed>.csv parts are joined, sorted by seed,
+  into goldens/logo/<case>.csv.gz
 - manifest.json (files, SHA-256, sizes, cases, package commits, generator)
 - checksums.sha256 (for ``sha256sum -c``)
 
@@ -64,7 +66,8 @@ def build_grids(src: Path, dst: Path) -> list[dict]:
 PART = re.compile(r"^(?P<case>[a-z_]+)\.(?P<first>\d+)-(?P<last>\d+)\.csv$")
 
 
-def build_ensembles(src: Path, dst: Path, seeds: int) -> list[dict]:
+def build_ensembles(src: Path, dst: Path, seeds: int,
+                    header: str = "seed,step,value,count") -> list[dict]:
     parts: dict[str, list[tuple[int, Path]]] = {}
     for p in sorted(src.glob("*.csv")):
         m = PART.match(p.name)
@@ -76,10 +79,10 @@ def build_ensembles(src: Path, dst: Path, seeds: int) -> list[dict]:
         missing = sorted(set(range(1, seeds + 1)) - set(found))
         if missing:
             raise SystemExit(f"{case}: missing seeds {missing[:10]}{'...' if len(missing) > 10 else ''}")
-        lines = ["seed,step,value,count"]
+        lines = [header]
         for _, p in sorted(files):
             body = p.read_text().splitlines()
-            assert body[0] == "seed,step,value,count", p
+            assert body[0] == header, p
             lines.extend(body[1:])
         write_gz(("\n".join(lines) + "\n").encode(), dst / f"{case}.csv.gz")
         steps = max(int(line.split(",")[1]) for line in lines[1:])
@@ -110,6 +113,8 @@ def main() -> None:
     grids = build_grids(build / "ca" / "grids", out / "ca" / "grids")
     ensembles = build_ensembles(build / "ca" / "ensembles", out / "ca" / "ensembles", args.seeds)
     sysdyn = build_sysdyn(build / "sysdyn", out / "sysdyn")
+    logo = build_ensembles(build / "logo", out / "logo", args.seeds,
+                           header="seed,step,variable,value")
 
     files = []
     for p in sorted(out.rglob("*")):
@@ -127,6 +132,7 @@ def main() -> None:
         "drivers": drivers,
         "ca": {"grids": grids, "ensembles": ensembles},
         "sysdyn": sysdyn,
+        "logo": logo,
         "files": files,
     }
     (ROOT / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")

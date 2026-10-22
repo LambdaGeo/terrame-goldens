@@ -18,12 +18,18 @@
       "name": "sci",
       "repository": "https://github.com/TerraME/sci",
       "commit": "42b0b3e319b6b6fe7bc2d3566e23876db12a2bac"
+    },
+    {
+      "name": "logo",
+      "repository": "https://github.com/TerraME/logo",
+      "commit": "bb57a26ad198694c4ae4170ab3b77b1f08f73e87"
     }
   ],
   "drivers": {
     "lua/ca_ensembles.lua": "80f2cfac4fa51edb36d700cb92b6c4481a4a5f6e9fb9387cabc7598c7eb3f2a3",
     "lua/ca_grids.lua": "a47a8a42a9060fc7fe42202c4513b8890b7a74380c14da5f1ea0f256b1dffdd2",
     "lua/common.lua": "441c5bca2027d7d36e3fb6c14dcc1fb737592f875adbfde6693de8dcca6c1ca0",
+    "lua/logo.lua": "6f832a0a9b8ddf8bd222abdc4784c19f22f4f58547129584953a0487b24aa28a",
     "lua/sysdyn.lua": "33b296c2b87739d1b6ab2db6b9489fbc6dfb62d4e2668ed747b86bf98093fa4c"
   },
   "ca": {
@@ -315,6 +321,33 @@
       "variables": "value"
     }
   ],
+  "logo": [
+    {
+      "case": "ants",
+      "seeds": 50,
+      "final_step": 450
+    },
+    {
+      "case": "disease",
+      "seeds": 50,
+      "final_step": 30
+    },
+    {
+      "case": "life_cycle",
+      "seeds": 50,
+      "final_step": 100
+    },
+    {
+      "case": "predator_prey",
+      "seeds": 50,
+      "final_step": 500
+    },
+    {
+      "case": "schelling",
+      "seeds": 50,
+      "final_step": 500
+    }
+  ],
   "files": [
     {
       "path": "goldens/ca/ensembles/fire.csv.gz",
@@ -405,6 +438,31 @@
       "path": "goldens/ca/grids/wolfram_90.csv.gz",
       "sha256": "9b15c41617f909d3355ac46e194aa314dfb8a10ea1a34eb8e8b89d9766f97303",
       "size_bytes": 18170
+    },
+    {
+      "path": "goldens/logo/ants.csv.gz",
+      "sha256": "f89d814ba4e75e2ab8ac5bc9f23fffc0ecc238514703f1e6d7c5986e36e23c1d",
+      "size_bytes": 118441
+    },
+    {
+      "path": "goldens/logo/disease.csv.gz",
+      "sha256": "cf537e526fdde29d84cb6d06d62fd8d32e9346dddd3dc4bb1a34afe03efb103f",
+      "size_bytes": 16040
+    },
+    {
+      "path": "goldens/logo/life_cycle.csv.gz",
+      "sha256": "b6c57ac68b3ca716cce004028c8d1e0abddcafb7d56bbda58b7191b361a2acff",
+      "size_bytes": 20331
+    },
+    {
+      "path": "goldens/logo/predator_prey.csv.gz",
+      "sha256": "bbf4ffaa7855b6f2b86ee02a845c243d986d538a7b76cb934c05602bc67e9019",
+      "size_bytes": 281655
+    },
+    {
+      "path": "goldens/logo/schelling.csv.gz",
+      "sha256": "d149203f8d909404d56d96279ed4ef7ed7777ed7379447a6c25a27da7ea3f5d3",
+      "size_bytes": 159245
     },
     {
       "path": "goldens/sysdyn/cases.csv",
