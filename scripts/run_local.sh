@@ -11,7 +11,7 @@ SEEDS="${2:-50}"
 JOBS="${3:-2}"
 export GOLDEN_LUA="$ROOT/lua" GOLDEN_OUT="$OUT"
 mkdir -p "$OUT/ca/grids" "$OUT/ca/ensembles"
-terrame -version | head -2
+xvfb-run -a terrame -version 2>/dev/null | head -2
 echo "ca: grids"
 xvfb-run -a terrame "$GOLDEN_LUA/ca_grids.lua"
 echo "ca: ensembles ($SEEDS seeds, $JOBS jobs)"

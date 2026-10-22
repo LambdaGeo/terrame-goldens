@@ -65,6 +65,11 @@ arguments, seed, final time and size of each case.
 An ensemble golden (`<case>.csv.gz`) has the columns `seed, step, value,
 count`; a state that no cell has in a step is not listed.
 
+SolidDiffusion only swaps atoms, so its counts per state never change. Its
+ensemble also has two spatial counts as extra values: `atom1_right`, the
+`atom1` cells to the right of the middle column, and `atom2_left`, the
+`atom2` cells to its left, which measure how far the atoms have mixed.
+
 `scripts/goldens.py` reads both with NumPy:
 
 ```python

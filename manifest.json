@@ -11,9 +11,9 @@
     }
   ],
   "drivers": {
-    "lua/ca_ensembles.lua": "0595d657af1a5b5235cf7eea64965cd35b5715c5284d7673274227d46cce6d4f",
+    "lua/ca_ensembles.lua": "80f2cfac4fa51edb36d700cb92b6c4481a4a5f6e9fb9387cabc7598c7eb3f2a3",
     "lua/ca_grids.lua": "a47a8a42a9060fc7fe42202c4513b8890b7a74380c14da5f1ea0f256b1dffdd2",
-    "lua/common.lua": "d91b85629a9563b9d4caed84cbcbeb1ba053ae0f72781df3eb519e35c6f039a8"
+    "lua/common.lua": "577a4f71b384fd21ef1af7f667885354de735e3402eb938ba264e73581168c74"
   },
   "ca": {
     "grids": [
@@ -189,8 +189,8 @@
     },
     {
       "path": "goldens/ca/ensembles/solid_diffusion.csv.gz",
-      "sha256": "19a4612cfab8896c17c4e19ce5404d40266b7ffa783e76baf96f774eadb13894",
-      "size_bytes": 136285
+      "sha256": "dc5b71f89981e657e3eb5e4c6a021ddbafeebf7c74e05e4940e75069cb675480",
+      "size_bytes": 262304
     },
     {
       "path": "goldens/ca/grids/anneal.csv.gz",

@@ -50,9 +50,12 @@ function countStates(cs, attr)
 	return counts
 end
 
-function recordCounts(model, cs, attr, f, seed)
+function recordCounts(model, cs, attr, f, seed, extra)
 	local function write(step)
 		local counts = countStates(cs, attr)
+		if extra then
+			for k, v in pairs(extra(cs)) do counts[k] = v end
+		end
 		local keys = {}
 		for k in pairs(counts) do keys[#keys + 1] = k end
 		table.sort(keys)
