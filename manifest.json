@@ -1,0 +1,261 @@
+{
+  "name": "terrame-goldens",
+  "version": "v0.1.0",
+  "generator": "TerraME 2.0.1 official binary (terrame-2.0.1-ubuntu18.tar.gz, SHA-256 846fa303a6e9dbe1869456e7a525186618595789eec276164b8afbb0ca7e33ed) run natively on Ubuntu 24.04 under Xvfb, libtiff.so.5 provided by libtiff.so.6; not yet regenerated in the terrame-docker image",
+  "terrame": "2.0.1",
+  "packages": [
+    {
+      "name": "ca",
+      "repository": "https://github.com/TerraME/ca",
+      "commit": "854a5c405478d712013a0baffd382f438f367642"
+    }
+  ],
+  "drivers": {
+    "lua/ca_ensembles.lua": "0595d657af1a5b5235cf7eea64965cd35b5715c5284d7673274227d46cce6d4f",
+    "lua/ca_grids.lua": "a47a8a42a9060fc7fe42202c4513b8890b7a74380c14da5f1ea0f256b1dffdd2",
+    "lua/common.lua": "d91b85629a9563b9d4caed84cbcbeb1ba053ae0f72781df3eb519e35c6f039a8"
+  },
+  "ca": {
+    "grids": [
+      {
+        "case": "life_glider",
+        "model": "Life",
+        "arguments": "pattern=glider",
+        "seed": "",
+        "final_time": "100",
+        "xdim": "30",
+        "ydim": "30",
+        "attribute": "state"
+      },
+      {
+        "case": "life_rpentomino",
+        "model": "Life",
+        "arguments": "pattern=rPentomino",
+        "seed": "",
+        "final_time": "100",
+        "xdim": "30",
+        "ydim": "30",
+        "attribute": "state"
+      },
+      {
+        "case": "life_random",
+        "model": "Life",
+        "arguments": "",
+        "seed": "1",
+        "final_time": "100",
+        "xdim": "30",
+        "ydim": "30",
+        "attribute": "state"
+      },
+      {
+        "case": "parity",
+        "model": "Parity",
+        "arguments": "",
+        "seed": "",
+        "final_time": "500",
+        "xdim": "50",
+        "ydim": "50",
+        "attribute": "state"
+      },
+      {
+        "case": "excitable",
+        "model": "Excitable",
+        "arguments": "",
+        "seed": "",
+        "final_time": "500",
+        "xdim": "50",
+        "ydim": "50",
+        "attribute": "state"
+      },
+      {
+        "case": "wolfram_30",
+        "model": "Wolfram",
+        "arguments": "rule=30",
+        "seed": "",
+        "final_time": "55",
+        "xdim": "111",
+        "ydim": "56",
+        "attribute": "state"
+      },
+      {
+        "case": "wolfram_90",
+        "model": "Wolfram",
+        "arguments": "rule=90",
+        "seed": "",
+        "final_time": "55",
+        "xdim": "111",
+        "ydim": "56",
+        "attribute": "state"
+      },
+      {
+        "case": "wolfram_110",
+        "model": "Wolfram",
+        "arguments": "rule=110",
+        "seed": "",
+        "final_time": "55",
+        "xdim": "111",
+        "ydim": "56",
+        "attribute": "state"
+      },
+      {
+        "case": "fire",
+        "model": "Fire",
+        "arguments": "",
+        "seed": "1",
+        "final_time": "100",
+        "xdim": "60",
+        "ydim": "60",
+        "attribute": "state"
+      },
+      {
+        "case": "anneal",
+        "model": "Anneal",
+        "arguments": "",
+        "seed": "1",
+        "final_time": "100",
+        "xdim": "80",
+        "ydim": "80",
+        "attribute": "state"
+      },
+      {
+        "case": "oscillator",
+        "model": "Oscillator",
+        "arguments": "",
+        "seed": "1",
+        "final_time": "400",
+        "xdim": "50",
+        "ydim": "50",
+        "attribute": "state"
+      },
+      {
+        "case": "parasit",
+        "model": "Parasit",
+        "arguments": "",
+        "seed": "1",
+        "final_time": "500",
+        "xdim": "50",
+        "ydim": "50",
+        "attribute": "state"
+      }
+    ],
+    "ensembles": [
+      {
+        "case": "fire",
+        "seeds": 50,
+        "final_step": 100
+      },
+      {
+        "case": "growth",
+        "seeds": 50,
+        "final_step": 100
+      },
+      {
+        "case": "interspecific_competition",
+        "seeds": 50,
+        "final_step": 200
+      },
+      {
+        "case": "snow",
+        "seeds": 50,
+        "final_step": 600
+      },
+      {
+        "case": "solid_diffusion",
+        "seeds": 50,
+        "final_step": 400
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "goldens/ca/ensembles/fire.csv.gz",
+      "sha256": "2fcdfa432da8e250fd4d7d2a40eec186e36b82e1d5536ec2051762f8657ed24c",
+      "size_bytes": 71275
+    },
+    {
+      "path": "goldens/ca/ensembles/growth.csv.gz",
+      "sha256": "249c76c7645bd269c0fa3ec6d856b9f3e7d9babb23f4452c01ce7a3f841e3f43",
+      "size_bytes": 41027
+    },
+    {
+      "path": "goldens/ca/ensembles/interspecific_competition.csv.gz",
+      "sha256": "b5dcbfb0fe07ef3043cedcbb3594c1b54fcebb3a40371fd53743039edb992697",
+      "size_bytes": 185820
+    },
+    {
+      "path": "goldens/ca/ensembles/snow.csv.gz",
+      "sha256": "c57ed9260d69f7fd25b7571a4c9f66580b555c3078af63ce5367b9f5257d1875",
+      "size_bytes": 206457
+    },
+    {
+      "path": "goldens/ca/ensembles/solid_diffusion.csv.gz",
+      "sha256": "19a4612cfab8896c17c4e19ce5404d40266b7ffa783e76baf96f774eadb13894",
+      "size_bytes": 136285
+    },
+    {
+      "path": "goldens/ca/grids/anneal.csv.gz",
+      "sha256": "f1d918d6ef51e0db341f3c07676ac88b491dbcf1a47148e1b01bb1ac859613c6",
+      "size_bytes": 61760
+    },
+    {
+      "path": "goldens/ca/grids/cases.csv",
+      "sha256": "224ce7726fbe66f4b505c0aae5937b16153ae929bd67c5ce3bb1f8f759c50fa5",
+      "size_bytes": 541
+    },
+    {
+      "path": "goldens/ca/grids/excitable.csv.gz",
+      "sha256": "bd92ca276cf3424f1439d2b1a78533bc605cfe1e1834434649a573ed9249c477",
+      "size_bytes": 79840
+    },
+    {
+      "path": "goldens/ca/grids/fire.csv.gz",
+      "sha256": "973a8b9e5024789ac944736f9c376c63acd220014f4cac328ef4e8b6ed8829ac",
+      "size_bytes": 46723
+    },
+    {
+      "path": "goldens/ca/grids/life_glider.csv.gz",
+      "sha256": "4864b1ff009f11601706ea33f2d226fa87af3fab911b8a3e21595ac10bbe497e",
+      "size_bytes": 9281
+    },
+    {
+      "path": "goldens/ca/grids/life_random.csv.gz",
+      "sha256": "20e28a42c86afa85b99d974cbaac3365c55ec6487e0eb9d0b9b1403f0f58660a",
+      "size_bytes": 20333
+    },
+    {
+      "path": "goldens/ca/grids/life_rpentomino.csv.gz",
+      "sha256": "df597c76e5c271af8576577a94f69025d5cc1e2254550320982fb5333b5254e9",
+      "size_bytes": 12219
+    },
+    {
+      "path": "goldens/ca/grids/oscillator.csv.gz",
+      "sha256": "dd26dd943b1d5fa8bfcf82ebaebf697436ce1827f452da715404b394c57a69d7",
+      "size_bytes": 341581
+    },
+    {
+      "path": "goldens/ca/grids/parasit.csv.gz",
+      "sha256": "814b9c11648545d337bfe81522641abba41eaaf0a8eba27df7ee8b9508bf4328",
+      "size_bytes": 350028
+    },
+    {
+      "path": "goldens/ca/grids/parity.csv.gz",
+      "sha256": "a3412ead9a48d67b2301f9e20c5d04ddb918d513a56d4b75ba1a152d75c0be52",
+      "size_bytes": 139993
+    },
+    {
+      "path": "goldens/ca/grids/wolfram_110.csv.gz",
+      "sha256": "5757b0593bdf25759b55ecdf6b61f8721c1538ad57ea910b3b629806e0d5a250",
+      "size_bytes": 18164
+    },
+    {
+      "path": "goldens/ca/grids/wolfram_30.csv.gz",
+      "sha256": "12a74a836d3051da613de58e101f0bbc700f796b4b9ce4ad4f1949c77fc9d72d",
+      "size_bytes": 24617
+    },
+    {
+      "path": "goldens/ca/grids/wolfram_90.csv.gz",
+      "sha256": "9b15c41617f909d3355ac46e194aa314dfb8a10ea1a34eb8e8b89d9766f97303",
+      "size_bytes": 18170
+    }
+  ]
+}

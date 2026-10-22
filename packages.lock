@@ -1,0 +1,3 @@
+# TerraME packages used to generate the goldens: name, repository, commit.
+# scripts/fetch_packages.sh clones each one into .packages/<name> at that commit.
+ca https://github.com/TerraME/ca 854a5c405478d712013a0baffd382f438f367642

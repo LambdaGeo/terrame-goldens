@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: "If you use these reference outputs or the harness that generates them, please cite them as below."
+type: dataset
+title: "terrame-goldens: Reference Execution Outputs of the TerraME ca, sysdyn and logo Packages"
+abstract: >-
+  Reference execution outputs (goldens) of the models of the TerraME 2.0.1 packages
+  (cellular automata of the ca package; sysdyn and logo to follow), with fixed package commits,
+  seeds and SHA-256 hashes, and the harness that regenerates them in the terrame-docker image.
+  They are used to verify the DisSModel extensions dissmodel-ca, dissmodel-sysdyn and
+  dissmodel-abm against TerraME itself.
+version: 0.1.0
+references:
+  - type: software
+    title: "terrame-docker: TerraME and LuccME in a Docker image"
+    repository-code: "https://github.com/profsergiocosta/terrame-docker"
+  - type: software
+    title: "ca: Cellular Automata package for TerraME"
+    repository-code: "https://github.com/TerraME/ca"
+license: MIT
+url: "https://github.com/LambdaGeo/terrame-goldens"
+repository-code: "https://github.com/LambdaGeo/terrame-goldens"
+keywords:
+  - TerraME
+  - cellular automata
+  - golden data
+  - verification
+  - reproducibility
+  - open science
+authors:
+  - family-names: Costa
+    given-names: Sérgio Souza
+    affiliation: "Universidade Federal do Maranhão (UFMA)"
+    orcid: "https://orcid.org/0000-0002-0232-4549"
