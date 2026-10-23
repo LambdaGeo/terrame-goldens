@@ -1,4 +1,4 @@
-# terrame-goldens — reference outputs of the TerraME packages ca (sysdyn and logo to come)
+# terrame-goldens — reference outputs of the TerraME packages ca, sysdyn and logo
 
 DOCKER_IMAGE ?= profsergiocosta/terrame-luccme:0.4.2
 SEEDS ?= 50

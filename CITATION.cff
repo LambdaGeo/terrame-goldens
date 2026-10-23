@@ -9,9 +9,12 @@ abstract: >-
   They are used to verify the DisSModel extensions dissmodel-ca, dissmodel-sysdyn and
   dissmodel-abm against TerraME itself.
 version: 0.1.0
+date-released: "2026-10-22"
 references:
   - type: software
     title: "terrame-docker: TerraME and LuccME in a Docker image"
+    version: 0.4.2
+    doi: 10.5281/zenodo.23160784
     authors:
       - family-names: Costa
         given-names: Sérgio Souza

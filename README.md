@@ -96,7 +96,7 @@ step, with default parameters. Format: `seed, step, variable, value`.
 | `schelling` | Schelling | 500 | `unhappy` (what the model's chart shows: % of unhappy agents counted when the step starts, before the move), `unhappy_after` (% after the move) |
 | `predator_prey` | PredatorPrey | 500 | `rabbits`, `wolves`, `pasture` (cells with pasture) |
 | `life_cycle` | LifeCycle | 100 | `agents` |
-| `ants` | Ants | 450 | `food` (the model's food counter), `bringing` (ants carrying food) |
+| `ants` | Ants | 450 | `food` (the model's food counter), `bringing` (ants carrying food); see "How this version was generated" |
 | `disease` | Disease | 30 | `susceptible`, `infected`, `recovered` |
 
 `SingleAgent` is not included (a single random walker has nothing to
@@ -149,7 +149,7 @@ host at its fixed commit and mounted into the image):
 
 ```bash
 make run-docker                    # raw output in build/
-make build VERSION=v0.1.0 GENERATOR="profsergiocosta/terrame-luccme@sha256:..."
+make build VERSION=v0.1.0 GENERATOR="$(cat build/docker_image.txt)"   # the image digest
 make check                         # sha256sum -c checksums.sha256
 ```
 
@@ -165,16 +165,36 @@ each driver and the SHA-256 and size of each golden.
 
 ### How this version was generated
 
-Version v0.1.0 was generated with the official TerraME 2.0.1 binary (the
-same file, checked by SHA-256, that the `terrame-docker` image installs) run
-directly on Ubuntu 24.04 under Xvfb, with `libtiff.so.6` standing in for the
-`libtiff.so.5` of Ubuntu 18.04; not inside the image. Before generating, the
-packages' own test suites were run in that setup. `ca`: 964 of 965 asserts
-passed, including every map snapshot of the models above; the one failure is
-a chart image of `Influenza` (2.9 % of the pixels differ, tolerance 0), a
-model that is not in these goldens. `sysdyn`: 35 of 36 asserts passed; the
-failure is the final value of `RandomWalk` with the test framework's seed (a
-test last updated in 2017), and the `Tub` test stops because the test mode
+Version v0.1.0 was generated in the `terrame-docker` image 0.4.2
+(`profsergiocosta/terrame-luccme@sha256:e0f46a7faed8a601c2ca10f3ba0dcebb352b13b8361e40d6580a0a034c21fb2c`),
+with `make run-docker`; the digest is also recorded in `manifest.json`. The
+runs are deterministic: running a driver twice gives byte-identical files.
+
+Regenerating outside the image, with the same TerraME 2.0.1 binary (checked
+by SHA-256) on Ubuntu 24.04, gives identical files except two, and both
+differences come from libraries of the operating system, not from TerraME or
+the models:
+
+- `sysdyn/daisyworld` differs from the 16th significant digit on (at most
+  2 × 10⁻¹⁵, relative) because of the C library's `pow` (glibc 2.27 in the
+  image, 2.39 on Ubuntu 24.04), used for the daisies' temperatures;
+- `logo/ants` differs from about step 8 on, because `Ants.lua` picks the
+  side of the nest an ant leaves from (`random_start`) with Lua's own
+  `math.random` instead of TerraME's `Random`, and that sequence depends on
+  the Lua library installed, not on the seed. The 50 runs have
+  the same distribution as in the image (food left at step 40: 90.6 ± 3.1 in
+  the image, 90.4 ± 3.3 outside it).
+
+This is why the reference is the image, pinned by digest, and why a
+re-implementation should compare Daisyworld with a tolerance and Ants by
+distribution.
+
+The packages' own test suites were run with the same binary. `ca`: 964 of
+965 asserts passed, including every map snapshot of the models above; the one
+failure is a chart image of `Influenza` (2.9 % of the pixels differ, tolerance
+0), a model that is not in these goldens. `sysdyn`: 35 of 36 asserts passed;
+the failure is the final value of `RandomWalk` with the test framework's seed
+(a test last updated in 2017), and the `Tub` test stops because the test mode
 treats `start = 10`, the default value, as an error (in a normal run it is a
 warning). `logo`: the suite does not start as published, because
 `lua/SpatialPD.lua` is missing from `load.lua`; with that file listed (in a
@@ -183,8 +203,7 @@ snapshots of Ants, Disease, PredatorPrey and SingleAgent all pass, random
 placement included. The snapshots that fail are those of Schelling and
 LifeCycle, made in March and May 2017 before their code changed (June and
 August 2017), and those of Overpopulation and Sugarscape, which are not in
-these goldens. The runs are deterministic: running a driver twice gives
-byte-identical files.
+these goldens.
 
 `make run-docker` followed by `make build` and `make check` regenerates
 everything in the image; the hashes should match those of `checksums.sha256`.

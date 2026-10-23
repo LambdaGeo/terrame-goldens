@@ -1,7 +1,7 @@
 {
   "name": "terrame-goldens",
   "version": "v0.1.0",
-  "generator": "TerraME 2.0.1 official binary (terrame-2.0.1-ubuntu18.tar.gz, SHA-256 846fa303a6e9dbe1869456e7a525186618595789eec276164b8afbb0ca7e33ed) run natively on Ubuntu 24.04 under Xvfb, libtiff.so.5 provided by libtiff.so.6; not yet regenerated in the terrame-docker image",
+  "generator": "profsergiocosta/terrame-luccme@sha256:e0f46a7faed8a601c2ca10f3ba0dcebb352b13b8361e40d6580a0a034c21fb2c",
   "terrame": "2.0.1",
   "packages": [
     {
@@ -441,8 +441,8 @@
     },
     {
       "path": "goldens/logo/ants.csv.gz",
-      "sha256": "f89d814ba4e75e2ab8ac5bc9f23fffc0ecc238514703f1e6d7c5986e36e23c1d",
-      "size_bytes": 118441
+      "sha256": "356ad4fd9fcef86bce572f453d83e2ad0de395dfaaa4d2c7844ee513e0bfa4c2",
+      "size_bytes": 118716
     },
     {
       "path": "goldens/logo/disease.csv.gz",
@@ -481,7 +481,7 @@
     },
     {
       "path": "goldens/sysdyn/daisyworld.csv.gz",
-      "sha256": "da394371bf4dc84114ae5c5815797d20aaa7fd85b6e7b182446e180f7d747c6c",
+      "sha256": "1b8668e090f51550b12562d5af517d2fe4b2845e1ec68381c4eb21e9bee516b4",
       "size_bytes": 5299
     },
     {
